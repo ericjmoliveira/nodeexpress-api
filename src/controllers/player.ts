@@ -63,13 +63,13 @@ class PlayerController {
       const player = await prisma.player.findFirst({ where: { id } });
 
       if (!player) {
-        return res.status(201).json({
+        return res.status(404).json({
           success: true,
           message: 'Player not found'
         });
       }
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         data: { player }
       });
@@ -98,7 +98,7 @@ class PlayerController {
       const data = schema.parse(req.body);
       const player = await prisma.player.update({ where: { id }, data });
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         data: { player },
         message: 'Player successfully updated'
@@ -126,7 +126,7 @@ class PlayerController {
 
       await prisma.player.delete({ where: { id } });
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         message: 'Player successfully deleted'
       });
